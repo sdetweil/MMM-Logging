@@ -7,7 +7,7 @@
 /* jshint node: true, esversion: 6*/
 
 var NodeHelper = require("node_helper");
-var tracer = null 
+var tracer   = null
 
 module.exports = NodeHelper.create({
     start: function() {
@@ -23,7 +23,7 @@ module.exports = NodeHelper.create({
                 tracer = require('tracer').colorConsole(this.config);
             } else {
                 tracer = require('tracer').console(this.config);
-            }
+            } 
             //console.info("MMM-Logging updated config received, reloading console");
             this.initialized = true;
         }

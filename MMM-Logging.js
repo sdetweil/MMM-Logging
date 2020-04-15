@@ -9,7 +9,7 @@
 
 /* jshint esversion: 6 */
 
-Module.register("mlog", {
+Module.register("MMM-Logging", {
     defaults: {
         useColor: true,
         format: "{{timestamp}} <{{title}}> {{message}} ({{folder}}/{{file}}:{{line}} {{method}})",
