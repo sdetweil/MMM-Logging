@@ -78,6 +78,8 @@ Refer to documentation for [`tracer`](https://github.com/baryon/tracer) for most
 | `echoModuleNotifications`       | *Optional* If set any module notifications sent on the front-end will be printed on the Node.JS console log. Can be set to 'notification' to just send the notifications, or 'payload' to include the payloads as well.<br>**Type:** `string` *Default* `'notification'`.
 | `echoErrors`       | *Optional* If `true`, any errors in the web browser (front-end) will be printed on the Node.JS console log. <br>**Type:** `bool` *Default* `true`.
 | `ignoreModules` | *Optional* Option to ignore notifications sent from certain modules. Defaults to ignoring `clock`, `calendar` and `newsfeed` since these send a lot of nusance notifications.
+| `echoLocal` | used to echo renderer side log messages to the local environment, this could cause duplicate messages <br>**Type:** `bool` *Default* `true` |
+| `echoRemote` | used to echo renderer side log messages from remote browsers to the local environment <br>**Type:** `bool` *Default* `false` |
 
 #### Default configuration:
 
@@ -88,4 +90,3 @@ Refer to documentation for [`tracer`](https://github.com/baryon/tracer) for most
     stackIndex: 2,
 }
 ```
-

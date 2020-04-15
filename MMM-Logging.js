@@ -9,13 +9,15 @@
 
 /* jshint esversion: 6 */
 
-Module.register("MMM-Logging", {
+Module.register("mlog", {
     defaults: {
         useColor: true,
         format: "{{timestamp}} <{{title}}> {{message}} ({{folder}}/{{file}}:{{line}} {{method}})",
         overwriteConsoleMethods: true,
-        overwriteBrowserMethods: false,
+        overwriteBrowserMethods: true,
         echoModuleNotifications: 'notification',
+        echoLocal:true,
+        echoRemote:false,
         echoErrors: true,
         dateformat: "yyyy-mm-dd'T'HH:MM:ss",
         ignoreModules: [ 'calendar', 'newsfeed', 'clock' ]
@@ -24,16 +26,17 @@ Module.register("MMM-Logging", {
     requiresVersion: "2.1.0", // Required version of MagicMirror
 
     start: function() {
+        var self=this;
         this.sendSocketNotification("INITIALIZE_LOGGING", this.config);
         if (this.config.overwriteBrowserMethods) {
             this.config.overwriteConsoleMethods = true;
             // Overwrite the Main Console
             this.console = Tracer.console(this.config);
             // Overwrite MagicMirror's Log functions.
-            Log.log = console.log;
-            Log.info = console.info;
-            Log.warn = console.warn;
-            Log.error = console.error;
+            Log.log = (x) => { if(self.config.echoRemote)this.sendSocketNotification("LOG_TO_CONSOLE",x); if(self.config.echoLocal) console.log(x)};
+            Log.info = (x) => { if(self.config.echoRemote)this.sendSocketNotification("INFO_TO_CONSOLE",x); if(self.config.echoLocal) console.info(x)};
+            Log.warn = (x) => { if(self.config.echoRemote)this.sendSocketNotification("WARN_TO_CONSOLE",x); if(self.config.echoLocal) console.warn(x)};
+            Log.error = (x) => { if(self.config.echoRemote)this.sendSocketNotification("ERROR_TO_CONSOLE",x); if(self.config.echoLocal) console.error(x)};
             Log.debug = (console.debug || console.log);
         }
         console.info("MMM-Logging updated window.console.");
