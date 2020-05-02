@@ -7,7 +7,7 @@
 /* jshint node: true, esversion: 6*/
 
 var NodeHelper = require("node_helper");
-var tracer   = null
+var tracer   = require('tracer')
 
 module.exports = NodeHelper.create({
     start: function() {
